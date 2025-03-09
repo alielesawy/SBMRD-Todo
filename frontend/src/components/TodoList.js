@@ -30,12 +30,16 @@ function TodoList() {
 
   const addTodo = async () => {
     if (title) {
+      try {
       await axios.post('http://localhost:8080/api/todos', { title, completed: false }, {
         headers: { 'User-Id': userId },
       });
       setTitle('');
       fetchTodos();
+    } catch (error) {
+      console.error('Failed to add todo:', error);
     }
+  }
   };
 
   const toggleTodo = async (todo) => {
