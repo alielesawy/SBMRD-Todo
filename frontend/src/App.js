@@ -6,12 +6,12 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 const theme = createTheme({
   palette: {
-    primary: {
-      main: '#2196f3',
-    },
-    secondary: {
-      main: '#f50057',
-    },
+    primary: { main: '#FF9900' }, // AWS orange
+    secondary: { main: '#232F3E' }, // AWS dark blue
+    background: { default: '#F7F7F7' },
+  },
+  typography: {
+    fontFamily: 'Amazon Ember, Roboto, sans-serif',
   },
 });
 

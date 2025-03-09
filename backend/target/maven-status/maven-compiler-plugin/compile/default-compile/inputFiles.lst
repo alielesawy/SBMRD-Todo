@@ -1,3 +1,7 @@
 /workspaces/SBMRD-Todo/backend/src/main/java/com/example/todo/model/Todo.java
+/workspaces/SBMRD-Todo/backend/src/main/java/com/example/todo/repository/UserRepository.java
 /workspaces/SBMRD-Todo/backend/src/main/java/com/example/todo/model/User.java
+/workspaces/SBMRD-Todo/backend/src/main/java/com/example/todo/controller/TodoController.java
+/workspaces/SBMRD-Todo/backend/src/main/java/com/example/todo/repository/TodoRepository.java
 /workspaces/SBMRD-Todo/backend/src/main/java/com/example/todo/Application.java
+/workspaces/SBMRD-Todo/backend/src/main/java/com/example/todo/controller/AuthController.java
