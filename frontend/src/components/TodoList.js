@@ -22,7 +22,7 @@ function TodoList() {
   }, [userId, navigate]);
 
   const fetchTodos = async () => {
-    const response = await axios.get('http://localhost:8080/api/todos', {
+    const response = await axios.get('http://backend:8080/api/todos', {
       headers: { 'User-Id': userId },
     });
     setTodos(response.data);
@@ -30,27 +30,23 @@ function TodoList() {
 
   const addTodo = async () => {
     if (title) {
-      try {
-      await axios.post('http://localhost:8080/api/todos', { title, completed: false }, {
+      await axios.post('http://backend:8080/api/todos', { title, completed: false }, {
         headers: { 'User-Id': userId },
       });
       setTitle('');
       fetchTodos();
-    } catch (error) {
-      console.error('Failed to add todo:', error);
     }
-  }
   };
 
   const toggleTodo = async (todo) => {
-    await axios.put(`http://localhost:8080/api/todos/${todo.id}`, { ...todo, completed: !todo.completed }, {
+    await axios.put(`http://backend:8080/api/todos/${todo.id}`, { ...todo, completed: !todo.completed }, {
       headers: { 'User-Id': userId },
     });
     fetchTodos();
   };
 
   const deleteTodo = async (id) => {
-    await axios.delete(`http://localhost:8080/api/todos/${id}`, {
+    await axios.delete(`http://backend:8080/api/todos/${id}`, {
       headers: { 'User-Id': userId },
     });
     fetchTodos();
