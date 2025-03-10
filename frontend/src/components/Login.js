@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { TextField, Button, Container, Typography, Box } from '@mui/material';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import './Login.css'; // Import the custom CSS file
 
 function Login() {
   const [username, setUsername] = useState('');
@@ -12,7 +13,7 @@ function Login() {
   const handleSubmit = async () => {
     const endpoint = isRegister ? '/register' : '/login';
     try {
-      const response = await axios.post(`http://backend:8080/api/auth${endpoint}`, {
+      const response = await axios.post(`http://localhost:8080/api/auth${endpoint}`, {
         username,
         password,
       });
@@ -33,9 +34,9 @@ function Login() {
   };
 
   return (
-    <Container maxWidth="xs">
+    <Container maxWidth="xs" className="login-container">
       <Box sx={{ mt: 8, textAlign: 'center' }}>
-        <Typography variant="h4" color="secondary">
+        <Typography variant="h4" color="textPrimary" className="login-title">
           {isRegister ? 'Register' : 'Login'}
         </Typography>
         <TextField
@@ -44,6 +45,9 @@ function Login() {
           margin="normal"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
+          InputProps={{
+            className: 'input-field',
+          }}
         />
         <TextField
           label="Password"
@@ -52,6 +56,9 @@ function Login() {
           margin="normal"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          InputProps={{
+            className: 'input-field',
+          }}
         />
         <Button
           variant="contained"
@@ -59,6 +66,7 @@ function Login() {
           fullWidth
           sx={{ mt: 2 }}
           onClick={handleSubmit}
+          className="submit-button"
         >
           {isRegister ? 'Register' : 'Login'}
         </Button>
@@ -67,6 +75,7 @@ function Login() {
           fullWidth
           sx={{ mt: 1 }}
           onClick={() => setIsRegister(!isRegister)}
+          className="switch-button"
         >
           {isRegister ? 'Switch to Login' : 'Switch to Register'}
         </Button>

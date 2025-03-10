@@ -1,0 +1,42 @@
+body {
+  background-color: #f3f4f6;
+  font-family: 'Amazon Ember', Arial, sans-serif;
+}
+
+.todo-container {
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.todo-title {
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.input-field {
+  background-color: #f3f4f6;
+  border-radius: 4px;
+}
+
+.add-button {
+  background-color: #ff9900;
+  color: #ffffff;
+  border-radius: 4px;
+  padding: 12px 0;
+  font-weight: 600;
+}
+
+.add-button:hover {
+  background-color: #e68a00;
+}
+
+.delete-button {
+  color: #ff9900;
+}
+
+.delete-button:hover {
+  color: #e68a00;
+}
