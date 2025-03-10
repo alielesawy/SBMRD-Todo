@@ -9,12 +9,10 @@ function Login() {
   const [isRegister, setIsRegister] = useState(false);
   const navigate = useNavigate();
 
-  const apiUrl = process.env.REACT_APP_API_URL || ''; // Empty for proxy in production
-
   const handleSubmit = async () => {
     const endpoint = isRegister ? '/register' : '/login';
     try {
-      const response = await axios.post(`${apiUrl}/api/auth${endpoint}`, {
+      const response = await axios.post(`/api/auth${endpoint}`, {
         username,
         password,
       });

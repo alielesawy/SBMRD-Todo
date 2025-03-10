@@ -12,7 +12,6 @@ function TodoList() {
   const [title, setTitle] = useState('');
   const userId = localStorage.getItem('userId');
   const navigate = useNavigate();
-  const apiUrl = process.env.REACT_APP_API_URL || ''; // Empty for proxy in production
 
   useEffect(() => {
     if (!userId) {
@@ -24,7 +23,7 @@ function TodoList() {
 
   const fetchTodos = async () => {
     try {
-      const response = await axios.get(`${apiUrl}/api/todos`, {
+      const response = await axios.get('/api/todos', {
         headers: { 'User-Id': userId },
       });
       setTodos(response.data);
@@ -35,7 +34,7 @@ function TodoList() {
 
   const addTodo = async () => {
     if (title) {
-      await axios.post(`${apiUrl}/api/todos`, { title, completed: false }, {
+      await axios.post('/api/todos', { title, completed: false }, {
         headers: { 'User-Id': userId },
       });
       setTitle('');
@@ -44,14 +43,14 @@ function TodoList() {
   };
 
   const toggleTodo = async (todo) => {
-    await axios.put(`${apiUrl}/api/todos/${todo.id}`, { ...todo, completed: !todo.completed }, {
+    await axios.put(`/api/todos/${todo.id}`, { ...todo, completed: !todo.completed }, {
       headers: { 'User-Id': userId },
     });
     fetchTodos();
   };
 
   const deleteTodo = async (id) => {
-    await axios.delete(`${apiUrl}/api/todos/${id}`, {
+    await axios.delete(`/api/todos/${id}`, {
       headers: { 'User-Id': userId },
     });
     fetchTodos();
