@@ -6,13 +6,13 @@ import {
 import DeleteIcon from '@mui/icons-material/Delete';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import './TodoList.css'; // Import the custom CSS file
 
 function TodoList() {
   const [todos, setTodos] = useState([]);
   const [title, setTitle] = useState('');
   const userId = localStorage.getItem('userId');
   const navigate = useNavigate();
+  const apiUrl = process.env.REACT_APP_API_URL || ''; // Empty for proxy in production
 
   useEffect(() => {
     if (!userId) {
@@ -23,15 +23,19 @@ function TodoList() {
   }, [userId, navigate]);
 
   const fetchTodos = async () => {
-    const response = await axios.get('http://localhost:8080/api/todos', {
-      headers: { 'User-Id': userId },
-    });
-    setTodos(response.data);
+    try {
+      const response = await axios.get(`${apiUrl}/api/todos`, {
+        headers: { 'User-Id': userId },
+      });
+      setTodos(response.data);
+    } catch (error) {
+      console.error('Fetch Todos Error:', error.response?.data);
+    }
   };
 
   const addTodo = async () => {
     if (title) {
-      await axios.post('http://localhost:8080/api/todos', { title, completed: false }, {
+      await axios.post(`${apiUrl}/api/todos`, { title, completed: false }, {
         headers: { 'User-Id': userId },
       });
       setTitle('');
@@ -40,23 +44,23 @@ function TodoList() {
   };
 
   const toggleTodo = async (todo) => {
-    await axios.put(`http://localhost:8080/api/todos/${todo.id}`, { ...todo, completed: !todo.completed }, {
+    await axios.put(`${apiUrl}/api/todos/${todo.id}`, { ...todo, completed: !todo.completed }, {
       headers: { 'User-Id': userId },
     });
     fetchTodos();
   };
 
   const deleteTodo = async (id) => {
-    await axios.delete(`http://localhost:8080/api/todos/${id}`, {
+    await axios.delete(`${apiUrl}/api/todos/${id}`, {
       headers: { 'User-Id': userId },
     });
     fetchTodos();
   };
 
   return (
-    <Container maxWidth="md" className="todo-container">
-      <Box sx={{ mt: 4, textAlign: 'center' }}>
-        <Typography variant="h4" color="textPrimary" className="todo-title" gutterBottom>
+    <Container maxWidth="md">
+      <Box sx={{ mt: 4 }}>
+        <Typography variant="h4" color="secondary" gutterBottom>
           Todo List
         </Typography>
         <Box sx={{ display: 'flex', mb: 2 }}>
@@ -65,18 +69,15 @@ function TodoList() {
             fullWidth
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            InputProps={{
-              className: 'input-field',
-            }}
           />
-          <Button variant="contained" color="primary" sx={{ ml: 1 }} onClick={addTodo} className="add-button">
+          <Button variant="contained" color="primary" sx={{ ml: 1 }} onClick={addTodo}>
             Add
           </Button>
         </Box>
         <List>
           {todos.map((todo) => (
             <ListItem key={todo.id} secondaryAction={
-              <IconButton edge="end" onClick={() => deleteTodo(todo.id)} className="delete-button">
+              <IconButton edge="end" onClick={() => deleteTodo(todo.id)}>
                 <DeleteIcon />
               </IconButton>
             }>
