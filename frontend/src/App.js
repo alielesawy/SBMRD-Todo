@@ -1,14 +1,32 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-import Login from './components/Login';
-import TodoList from './components/TodoList';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Login from './Login';
+import TodoList from './TodoList';
+import { CssBaseline, ThemeProvider, createTheme } from '@mui/material';
+import './cyberpunk.css';
+
+const cyberpunkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+    primary: { main: '#00ffcc' },
+    secondary: { main: '#ff00ff' },
+  },
+  typography: {
+    fontFamily: 'Orbitron, sans-serif',
+  },
+});
 
 function App() {
   return (
-    <Routes>
-      <Route path="/login" element={<Login />} />
-      <Route path="/" element={<TodoList />} />
-    </Routes>
+    <ThemeProvider theme={cyberpunkTheme}>
+      <CssBaseline />
+      <Router>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<TodoList />} />
+        </Routes>
+      </Router>
+    </ThemeProvider>
   );
 }
 
