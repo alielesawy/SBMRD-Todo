@@ -14,7 +14,7 @@ function Login() {
   const handleSubmit = async () => {
     const endpoint = isRegister ? '/register' : '/login';
     try {
-      const response = await axios.post(`http://localhost:8080/api/auth${endpoint}`, {
+      const response = await axios.post(`/api/auth${endpoint}`, {
         username,
         password,
       });

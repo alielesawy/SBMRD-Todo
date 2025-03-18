@@ -24,7 +24,7 @@ function TodoList() {
 
   const fetchTodos = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/api/todos', {
+      const response = await axios.get('/api/todos', {
         headers: { 'User-Id': userId },
       });
       setTodos(response.data);
@@ -35,7 +35,7 @@ function TodoList() {
 
   const addTodo = async () => {
     if (title) {
-      await axios.post('http://localhost:8080/api/todos', { title, completed: false }, {
+      await axios.post('/api/todos', { title, completed: false }, {
         headers: { 'User-Id': userId },
       });
       setTitle('');
@@ -44,22 +44,22 @@ function TodoList() {
   };
 
   const toggleTodo = async (todo) => {
-    await axios.put(`http://localhost:8080/api/todos/${todo.id}`, { ...todo, completed: !todo.completed }, {
+    await axios.put(`/api/todos/${todo.id}`, { ...todo, completed: !todo.completed }, {
       headers: { 'User-Id': userId },
     });
     fetchTodos();
   };
 
   const deleteTodo = async (id) => {
-    await axios.delete(`http://localhost:8080/api/todos/${id}`, {
+    await axios.delete(`/api/todos/${id}`, {
       headers: { 'User-Id': userId },
     });
     fetchTodos();
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('userId'); // Clear userId from localStorage
-    navigate('/login'); // Redirect to login page
+    localStorage.removeItem('userId'); 
+    navigate('/login'); 
   };
 
   return (
