@@ -61,7 +61,7 @@ html {
 
 /* Login Page Background */
 .cyber-login-bg {
-  background: url('../../assets/cyberpunk-login-bg.png') no-repeat center center;
+  background: url('images/cyberpunk-login-bg.png') no-repeat center center;
   background-size: cover;
   background-attachment: fixed;
   background-color: #1a0d2e; /* Fallback color: dark purple */
@@ -75,7 +75,7 @@ html {
 
 /* Todo List Background */
 .cyber-todo-bg {
-  background: url('../../assets/cyberpunk-bg.jpg') no-repeat center center;
+  background: url('images/cyberpunk-bg.jpg') no-repeat center center;
   background-size: cover;
   background-attachment: fixed;
   background-color: #1a0d2e; /* Fallback color: dark purple */
