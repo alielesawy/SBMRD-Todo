@@ -5,6 +5,8 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './cyberpunk.css';
 
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080';
+
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -15,7 +17,7 @@ function Login() {
   const handleSubmit = async () => {
     const endpoint = isRegister ? '/register' : '/login';
     try {
-      const response = await axios.post(`/api/auth${endpoint}`, {
+      const response = await axios.post(`${API_URL}/api/auth${endpoint}`, {
         username,
         password,
       });

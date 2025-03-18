@@ -8,6 +8,8 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './cyberpunk.css';
 
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080';
+
 function TodoList() {
   const [todos, setTodos] = useState([]);
   const [title, setTitle] = useState('');
@@ -24,7 +26,7 @@ function TodoList() {
 
   const fetchTodos = async () => {
     try {
-      const response = await axios.get('/api/todos', {
+      const response = await axios.get('${API_URL}/api/todos', {
         headers: { 'User-Id': userId },
       });
       setTodos(response.data);
@@ -35,7 +37,7 @@ function TodoList() {
 
   const addTodo = async () => {
     if (title) {
-      await axios.post('/api/todos', { title, completed: false }, {
+      await axios.post('${API_URL}/api/todos', { title, completed: false }, {
         headers: { 'User-Id': userId },
       });
       setTitle('');
@@ -44,14 +46,14 @@ function TodoList() {
   };
 
   const toggleTodo = async (todo) => {
-    await axios.put(`/api/todos/${todo.id}`, { ...todo, completed: !todo.completed }, {
+    await axios.put(`${API_URL}/api/todos/${todo.id}`, { ...todo, completed: !todo.completed }, {
       headers: { 'User-Id': userId },
     });
     fetchTodos();
   };
 
   const deleteTodo = async (id) => {
-    await axios.delete(`/api/todos/${id}`, {
+    await axios.delete(`${API_URL}/api/todos/${id}`, {
       headers: { 'User-Id': userId },
     });
     fetchTodos();
